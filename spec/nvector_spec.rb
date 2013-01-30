@@ -40,7 +40,7 @@ describe NVector do
     v[0].should == 1.555
   end
   
-  it "transpose() changes low and coloumn stored structure" do
+  it "transpose() changes raw and coloumn stored structure" do
     v = NVector.new 5, :float64
     v = v.transpose
     v.shape[0].should == 1
@@ -49,7 +49,7 @@ describe NVector do
     v[0].should == 1.555
   end
 
-  it "transpose!() changes its low and column stored structure" do
+  it "transpose!() changes destructively its raw and column stored structure" do
     v = NVector.new 5, :float64
     v.transpose!
     v.shape[0].should == 1
@@ -66,7 +66,7 @@ describe NVector do
     v1.multiply(v2).should == 12.0
   end
 
-  it "multiply!() multiples itself by another NVector" do
+  it "multiply!() multiples destructively itself by another NVector" do
     v1 = NVector.new 2, :float64
     v2 = NVector.new 2, :float64
     v1[0] = 1.5
