@@ -151,7 +151,8 @@
 #else   /* These are the C versions of the macros. */
 
   #define NM_DECL_ENUM(enum_type, name)   nm_ ## enum_type name
-  #define NM_DECL_STRUCT(type, name)      NM_ ## type      name;
+  #define NM_DECL_STRUCT(type, name)    struct NM_ ## type      name;
+  //#define NM_DECL_STRUCT(type, name)      NM_ ## type      name;
 
   #define NM_DEF_STORAGE_ELEMENTS   \
     NM_DECL_ENUM(dtype_t, dtype);   \
@@ -199,6 +200,7 @@ NM_DEF_ENUM(stype_t,  DENSE_STORE = 0,
                       YALE_STORE = 2);
 
 /* Data Type */
+/*
 NM_DEF_ENUM(dtype_t,	BYTE				=  0,  // unsigned char
                     	INT8				=  1,  // char
                     	INT16				=  2,  // short
@@ -212,6 +214,7 @@ NM_DEF_ENUM(dtype_t,	BYTE				=  0,  // unsigned char
                     	RATIONAL64	= 10,  // Rational64 class
                     	RATIONAL128	= 11,  // Rational128 class
                     	RUBYOBJ			= 12);  // Ruby VALUE type
+*/
 
 /* Index Type for Yale Matrices */
 NM_DEF_ENUM(itype_t,  UINT8  = 0,
@@ -320,7 +323,9 @@ NM_DEF_STRUCT_POST(NMATRIX);  // };
   (rb_obj_is_kind_of(obj, cNVector) == Qtrue)
 
 
+#ifdef __cplusplus
 typedef VALUE (*METHOD)(...);
+#endif
 
 #ifdef __cplusplus
 //}; // end of namespace nm
@@ -330,7 +335,9 @@ typedef VALUE (*METHOD)(...);
  * Functions
  */
 
+#ifdef __cplusplus
 extern "C" {
+#endif
 	void Init_nmatrix();
 	
 	// External API
@@ -338,6 +345,8 @@ extern "C" {
 	VALUE rb_nvector_dense_create(NM_DECL_ENUM(dtype_t, dtype), void* elements, size_t length);
 
 	NM_DECL_ENUM(dtype_t, nm_dtype_guess(VALUE));   // (This is a function)
+#ifdef __cplusplus
 }
+#endif
 
 #endif // NMATRIX_H
