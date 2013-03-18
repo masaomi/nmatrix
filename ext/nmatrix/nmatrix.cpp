@@ -1710,7 +1710,9 @@ static VALUE elementwise_op(nm::ewop_t op, VALUE left_val, VALUE right_val) {
 	CheckNMatrixType(left_val);
 	UnwrapNMatrix(left_val, left);
 
-  if (TYPE(right_val) != T_DATA || (RDATA(right_val)->dfree != (RUBY_DATA_FUNC)nm_delete && RDATA(right_val)->dfree != (RUBY_DATA_FUNC)nm_delete_ref)) {
+  // masa temporarily solution
+  //if (TYPE(right_val) != T_DATA || (RDATA(right_val)->dfree != (RUBY_DATA_FUNC)nm_delete && RDATA(right_val)->dfree != (RUBY_DATA_FUNC)nm_delete_ref)) {
+  if(TYPE(right_val) != T_DATA){ 
     // This is a matrix-scalar element-wise operation.
 
     if (left->stype != nm::YALE_STORE) {
